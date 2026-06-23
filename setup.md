@@ -14,3 +14,7 @@ CSS Peek
 
 # Install Package
 npm install tailwindcss @tailwindcss/vite
+
+npm install react-router-dom react-hot-toast lucide-react @icons-pack/react-simple-icons leaflet react-leaflet
+npm install -D @types/leaflet
+
