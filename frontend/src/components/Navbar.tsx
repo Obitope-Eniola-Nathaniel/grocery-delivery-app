@@ -31,6 +31,19 @@ const Navbar = () => {
   const [userMenuOpen, setuserMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  const handleSearch = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
+  const handleLogout = () => {
+    setuserMenuOpen(false);
+    navigate("/");
+  };
+
   return (
     <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-19 gap-4">
@@ -54,6 +67,7 @@ const Navbar = () => {
 
           {/* Search  */}
           <form
+            onSubmit={handleSearch}
             action=""
             className="hidden sm:flex flex-1 max-w-sm text-xs sm:text-sm"
           >
@@ -87,7 +101,10 @@ const Navbar = () => {
             {/* User */}
             <div className="relative">
               {user ? (
-                <button onClick={() => setuserMenuOpen(!userMenuOpen)} className="flex items-center gap-2 p-2">
+                <button
+                  onClick={() => setuserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 p-2"
+                >
                   <div className="size-7 rounded-full bg-green-950 text-white flex-center">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
@@ -154,7 +171,10 @@ const Navbar = () => {
                           </Link>
                         )}
 
-                        <Link to="/products" className="dropdown-link md:hidden">
+                        <Link
+                          to="/products"
+                          className="dropdown-link md:hidden"
+                        >
                           <ArrowUpRightIcon size={16} />
                           Product
                         </Link>
@@ -165,18 +185,20 @@ const Navbar = () => {
                         </Link>
 
                         {user?.isAdmin && (
-                          <Link
-                            to="/admin/products"
-                            className="dropdown-link"
-                          >
-                            <ShieldIcon className="text-app-orange-dark" size={16} />
-                            <span className="text-app-orange-dark"> Admin Panel</span>
+                          <Link to="/admin/products" className="dropdown-link">
+                            <ShieldIcon
+                              className="text-app-orange-dark"
+                              size={16}
+                            />
+                            <span className="text-app-orange-dark">
+                              Admin Panel
+                            </span>
                           </Link>
                         )}
 
-                        { user && (
+                        {user && (
                           <div className="border-t border-app-border pt-1">
-                            <button className="flex items-center gap-3 px-4 py-2.5 text-sm text-app-error hover:bg-red-50 w-full transition-colors">
+                            <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-app-error hover:bg-red-50 w-full transition-colors">
                               <LogOutIcon size={16} /> Logout
                             </button>
                           </div>
