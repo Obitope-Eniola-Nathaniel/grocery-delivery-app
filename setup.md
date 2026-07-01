@@ -18,3 +18,10 @@ npm install tailwindcss @tailwindcss/vite
 npm install react-router-dom react-hot-toast lucide-react @icons-pack/react-simple-icons leaflet react-leaflet
 npm install -D @types/leaflet
 
+
+
+Backend Server Setup
+
+npm i jsonwebtoken bcrypt multer cloudinary
+npm i -D @types/jsonwebtoken @types/bcrypt @types/multer 
+not support anymore @types/cloudinary
